@@ -6,7 +6,7 @@ import 'package:flutter/widgets.dart';
 
 void main() {
 
-  runApp(const Bai2());
+  runApp(const Bai1());
 }
 
 class Bai1 extends StatelessWidget {
@@ -20,24 +20,20 @@ class Bai1 extends StatelessWidget {
         body: Column(
           children: [
              Container(
+               height: 45,
               color: Colors.red,
-              child: const Row(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Expanded(
-                    child:  Padding(
-                      padding: EdgeInsets.only(top: 20, bottom: 10),
-                      child: Text("Lịch sử hiến máu", textAlign: TextAlign.center, // Căn giữa văn bản
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                      padding: EdgeInsets.only(right: 20),
-                      child: Icon(Icons.chat, color: Colors.white,)
-                  ),
+                  SizedBox(width: 30,),
+                  Text("Lịch sử hiến máu", textAlign: TextAlign.center, // Căn giữa văn bản
+                  style: TextStyle(color: Colors.white)),
+                  Container(child: Icon(Icons.chat, color: Colors.white,),
+                  margin: EdgeInsets.only(right: 8),)
                 ],
               ),
             ),
+            SizedBox(width: double.maxFinite, height: 16,),
             Container(
               child: Column(
                 children: [
@@ -87,184 +83,203 @@ class Bai1 extends StatelessWidget {
               padding: EdgeInsets.symmetric(vertical: 8, horizontal: 12),
               child: Text("Mức 2", style: TextStyle(color: Colors.white),),
             ),
-            Container(
-              padding: EdgeInsets.all(8),
-              color: Colors.grey,
-              child: Column(
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.all(Radius.circular(10))
-                    ),
-                    margin: EdgeInsets.symmetric(vertical: 8),
-                    child: Row(
-                      children: [
-                        Container(
-                          width: 20,
-                          height: 100,
-                            decoration: BoxDecoration(
-                              color: Colors.red,
-                              borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(10),
-                              bottomLeft: Radius.circular(10))
-                            )
-                        ),
-                        Container(
-                          width: 100,
-                          height: 100,
-                          child: Text("Lần 4"),
-                          alignment: Alignment.center,
-                          color: Colors.cyanAccent,
-                        ),
-                        Row(
-                          children: [
-                            Container(
-                              margin: EdgeInsets.only(left: 16),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text("25/01/2024"),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      Container(
-                                        child: Image.asset("assets/syringe_outline.png"),
-                                        margin: EdgeInsets.only(right: 8),
-                                      ),
-                                      Text("350 ml (Toàn phần)")
-                                    ],
-                                  ),
-                                  Text("Trung tâm Mẫu Quốc gia")
-                                ],
-                              ),
-                            ),
-                            Container(
-                              margin: EdgeInsets.all(16),
-                              child: Image.asset("assets/skip_track.png"),
-                            )
-                          ],
-                        )
-
-                      ],
-                    ),
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
+            Expanded(
+              child: Container(
+                padding: EdgeInsets.all(8),
+                color: Colors.grey,
+                child: Column(
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.all(Radius.circular(10))
-                    ),
-                    margin: EdgeInsets.symmetric(vertical: 8),
-                    child: Row(
-                      children: [
-                        Container(
+                      ),
+                      margin: EdgeInsets.symmetric(vertical: 8),
+                      child: Row(
+                        children: [
+                          Container(
                             width: 20,
                             height: 100,
-                            decoration: BoxDecoration(
+                              decoration: BoxDecoration(
                                 color: Colors.red,
                                 borderRadius: BorderRadius.only(
                                     topLeft: Radius.circular(10),
-                                    bottomLeft: Radius.circular(10))
-                            )
-                        ),
-                        Container(
-                          width: 100,
-                          height: 100,
-                          child: Text("Lần 3"),
-                          alignment: Alignment.center,
-                          color: Colors.cyanAccent,
-                        ),
-                        Row(
-                          children: [
-                            Container(
-                              margin: EdgeInsets.only(left: 16),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text("25/01/2024"),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      Container(
-                                        child: Image.asset("assets/syringe_outline.png"),
-                                        margin: EdgeInsets.only(right: 8),
-                                      ),
-                                      Text("350 ml (Toàn phần)")
-                                    ],
-                                  ),
-                                  Text("Trung tâm Mẫu Quốc gia")
-                                ],
-                              ),
-                            ),
-                            Container(
-                              margin: EdgeInsets.all(16),
-                              child: Image.asset("assets/skip_track.png"),
-                            )
-                          ],
-                        )
-
-                      ],
-                    ),
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.all(Radius.circular(10))
-                    ),
-                    margin: EdgeInsets.symmetric(vertical: 8),
-                    child: Row(
-                      children: [
-                        Container(
-                            width: 20,
+                                bottomLeft: Radius.circular(10))
+                              )
+                          ),
+                          Container(
+                            width: 100,
                             height: 100,
-                            decoration: BoxDecoration(
-                                color: Colors.red,
-                                borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(10),
-                                    bottomLeft: Radius.circular(10))
-                            )
-                        ),
-                        Container(
-                          width: 100,
-                          height: 100,
-                          child: Text("Lần 2"),
-                          alignment: Alignment.center,
-                          color: Colors.cyanAccent,
-                        ),
-                        Row(
-                          children: [
-                            Container(
-                              margin: EdgeInsets.only(left: 16),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                            child: Text("Lần 4"),
+                            alignment: Alignment.center,
+                            color: Colors.cyanAccent,
+                          ),
+                          Expanded(
+                            child: Container(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text("25/01/2024"),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      Container(
-                                        child: Image.asset("assets/syringe_outline.png"),
-                                        margin: EdgeInsets.only(right: 8),
-                                      ),
-                                      Text("350 ml (Toàn phần)")
-                                    ],
+                                  Container(
+                                    margin: EdgeInsets.only(left: 16),
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text("25/01/2024"),
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.start,
+                                          children: [
+                                            Container(
+                                              child: Image.asset("assets/syringe_outline.png"),
+                                              margin: EdgeInsets.only(right: 8),
+                                            ),
+                                            Text("350 ml (Toàn phần)")
+                                          ],
+                                        ),
+                                        Text("Trung tâm Mẫu Quốc gia")
+                                      ],
+                                    ),
                                   ),
-                                  Text("Trung tâm Mẫu Quốc gia")
+                                  Container(
+                                    margin: EdgeInsets.all(16),
+                                    child: Image.asset("assets/skip_track.png"),
+                                  )
                                 ],
                               ),
                             ),
-                            Container(
-                              margin: EdgeInsets.all(16),
-                              child: Image.asset("assets/skip_track.png"),
-                            )
-                          ],
-                        )
-
-                      ],
+                          )
+              
+              
+                        ],
+                      ),
                     ),
-                  ),
-
-                ],
+                    Container(
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.all(Radius.circular(10))
+                      ),
+                      margin: EdgeInsets.symmetric(vertical: 8),
+                      child: Row(
+                        children: [
+                          Container(
+                              width: 20,
+                              height: 100,
+                              decoration: BoxDecoration(
+                                  color: Colors.red,
+                                  borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(10),
+                                      bottomLeft: Radius.circular(10))
+                              )
+                          ),
+                          Container(
+                            width: 100,
+                            height: 100,
+                            child: Text("Lần 3"),
+                            alignment: Alignment.center,
+                            color: Colors.cyanAccent,
+                          ),
+                          Expanded(
+                            child: Container(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Container(
+                                    margin: EdgeInsets.only(left: 16),
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text("25/01/2023"),
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.start,
+                                          children: [
+                                            Container(
+                                              child: Image.asset("assets/syringe_outline.png"),
+                                              margin: EdgeInsets.only(right: 8),
+                                            ),
+                                            Text("350 ml (Toàn phần)")
+                                          ],
+                                        ),
+                                        Text("Trung tâm Mẫu Quốc gia")
+                                      ],
+                                    ),
+                                  ),
+                                  Container(
+                                    margin: EdgeInsets.all(16),
+                                    child: Image.asset("assets/skip_track.png"),
+                                  )
+                                ],
+                              ),
+                            ),
+                          )
+              
+              
+                        ],
+                      ),
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.all(Radius.circular(10))
+                      ),
+                      margin: EdgeInsets.symmetric(vertical: 8),
+                      child: Row(
+                        children: [
+                          Container(
+                              width: 20,
+                              height: 100,
+                              decoration: BoxDecoration(
+                                  color: Colors.red,
+                                  borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(10),
+                                      bottomLeft: Radius.circular(10))
+                              )
+                          ),
+                          Container(
+                            width: 100,
+                            height: 100,
+                            child: Text("Lần 2"),
+                            alignment: Alignment.center,
+                            color: Colors.cyanAccent,
+                          ),
+                          Expanded(
+                            child: Container(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Container(
+                                    margin: EdgeInsets.only(left: 16),
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text("25/01/2022"),
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.start,
+                                          children: [
+                                            Container(
+                                              child: Image.asset("assets/syringe_outline.png"),
+                                              margin: EdgeInsets.only(right: 8),
+                                            ),
+                                            Text("350 ml (Toàn phần)")
+                                          ],
+                                        ),
+                                        Text("Trung tâm Mẫu Quốc gia")
+                                      ],
+                                    ),
+                                  ),
+                                  Container(
+                                    margin: EdgeInsets.all(16),
+                                    child: Image.asset("assets/skip_track.png"),
+                                  )
+                                ],
+                              ),
+                            ),
+                          )
+              
+              
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
             )
           ],
