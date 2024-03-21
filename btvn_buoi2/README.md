@@ -1,6 +1,6 @@
 ## Bai 1
+<img src="https://github.com/dinhthi1440/Expense-management-program/assets/108991843/9a7c6737-9da0-4374-aed1-28cadc327f3d"width="250" />
 
-![z5269036859492_f7339f6462dc132e99c17acb107f2a10](https://github.com/dinhthi1440/Expense-management-program/assets/108991843/9a7c6737-9da0-4374-aed1-28cadc327f3d)
 
 ## Bai 2
 
