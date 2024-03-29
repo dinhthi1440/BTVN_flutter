@@ -15,22 +15,19 @@ class MyApp extends StatefulWidget {
 }
 
 class TimeCountDown extends StatefulWidget {
-  final int time;
+  int time;
   final void Function(int) isCountDownFinish;
   bool isPressButton ;
   TimeCountDown({Key? key, required this.time, required this.isPressButton,
     required this.isCountDownFinish}) : super(key: key);
   @override
-  State<TimeCountDown> createState() => _TimeCountDownState(time,isPressButton,
-      isCountDownFinish);
+  State<TimeCountDown> createState() => _TimeCountDownState(isCountDownFinish);
 }
 
 class _TimeCountDownState extends State<TimeCountDown> {
-  late int _time;
-  late bool _isPressButton;
   final void Function(int) isCountDownFinish;
 
-  _TimeCountDownState(this._time, this._isPressButton, this.isCountDownFinish);
+  _TimeCountDownState(this.isCountDownFinish);
 
   @override
   void initState() {
@@ -38,12 +35,12 @@ class _TimeCountDownState extends State<TimeCountDown> {
     _startCountDown();
   }
 
+
   void _startCountDown() {
     Timer.periodic(Duration(seconds: 1), (timer) {
       setState(() {
-
-        if (_time > 0 && !_isPressButton) {
-          _time--;
+        if (widget.time > 0 && !widget.isPressButton) {
+          widget.time--;
         } else {
           timer.cancel();
           isCountDownFinish(-1);
@@ -52,16 +49,10 @@ class _TimeCountDownState extends State<TimeCountDown> {
     });
   }
 
-  set isPressButton(bool value) {
-    setState(() {
-      _isPressButton = value;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Text(
-      "Thời gian: $_time s",
+      "Thời gian: ${widget.time} s",
       style: TextStyle(
         color: Colors.black,
         fontSize: 30,
@@ -74,7 +65,7 @@ class _TimeCountDownState extends State<TimeCountDown> {
 
 
 class _MyAppState extends State<MyApp> {
-  int numberScreen = 2;
+  int numberScreen = 1;
   int numberBest = 0;
   int numberCurrent=0;
 
@@ -89,8 +80,10 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: numberScreen ==1 ? HomeScreen() : numberScreen == 2
-          ? PlayingScreen() : GameOver(),
+      home: SafeArea(
+        child: numberScreen ==1 ? homeScreen() : numberScreen == 2
+            ? playingScreen() : gameOver(),
+      )
     );
   }
 
@@ -114,9 +107,8 @@ class _MyAppState extends State<MyApp> {
     }
   }
 
-  Widget HomeScreen() {
-
-
+  Widget homeScreen() {
+  numberCurrent=0;
     return Scaffold(
       backgroundColor: Colors.blue,
       body: Center(
@@ -150,23 +142,19 @@ class _MyAppState extends State<MyApp> {
                   ),)
                 ],
               ),
-              Container(
-                margin: EdgeInsets.only(top: 100),
-                padding: EdgeInsets.symmetric(vertical: 2, horizontal: 30),
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.all(Radius.circular(10))
-                ),
+              SizedBox(height: 100,),
+              Material(
+                borderRadius: BorderRadius.all(Radius.circular(5)),
                 child: InkWell(
-                  child: IconButton(
-                    icon: Icon(Icons.play_arrow, color: Colors.blue, size: 35,),
-                    onPressed: () {
+                    onTap: () {
                       screenChange(2);
                     },
-                  ),
-
+                    child: Container(
+                      padding: EdgeInsets.symmetric(vertical: 2, horizontal: 30),
+                      child: Icon(Icons.play_arrow, color: Colors.blue, size: 35,),
+                    )
                 ),
-              )
+              ),
             ],
           )
       ),
@@ -176,7 +164,7 @@ class _MyAppState extends State<MyApp> {
 
 
   // int = 2
-  Widget PlayingScreen(){
+  Widget playingScreen(){
     int signID = Random().nextInt(4) + 1;
     late int number1;
     late int number2;
@@ -215,7 +203,7 @@ class _MyAppState extends State<MyApp> {
         number1 = Random().nextInt(500);
         do{
           number2 = Random().nextInt(100);
-        }while(number1%number2!=0);
+        }while(number2==0 || number1%number2!=0);
         result = (number1 / number2).round();
         timeCountDown = 8;
         break;
@@ -227,8 +215,6 @@ class _MyAppState extends State<MyApp> {
         screenChange(3);
       }
     }
-    var a = TimeCountDown(time: timeCountDown,isPressButton: isPressButton,
-      isCountDownFinish: countDownFinished,);
 
     return Scaffold(
       backgroundColor: Colors.orange,
@@ -240,7 +226,8 @@ class _MyAppState extends State<MyApp> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  a,
+                TimeCountDown(time: timeCountDown,isPressButton: isPressButton,
+                isCountDownFinish: countDownFinished,),
                   Text("Điểm: $numberCurrent", style: TextStyle(
                       color: Colors.black,
                       fontSize: 30,
@@ -268,40 +255,30 @@ class _MyAppState extends State<MyApp> {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Container(
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.all(Radius.circular(5))
-                    ),
+                  Material(
+                    borderRadius: BorderRadius.all(Radius.circular(5)),
                     child: InkWell(
-                      child: IconButton(
-                        icon: Icon(Icons.done, color: Colors.blue,size: 150,),
-                        onPressed: () {
+                        onTap: () {
                           numberCurrent += checkAnswer(true, result, resultDisplay);
                           setState(() {
-                            a.isPressButton = true;
+                            isPressButton = true;
                           });
                         },
-                      ),
+                        child: Icon(Icons.done, color: Colors.blue,size: 150,)
                     ),
                   ),
-                  Container(
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.all(Radius.circular(5))
-                    ),
+                  Material(
+                    borderRadius: BorderRadius.all(Radius.circular(5)),
                     child: InkWell(
-                      child: IconButton(
-                        icon: Icon(Icons.close, color: Colors.red,size: 150,),
-                        onPressed: () {
-                          numberCurrent += checkAnswer(false, result, resultDisplay);
+                        onTap: () {
+                          numberCurrent += checkAnswer(true, result, resultDisplay);
                           setState(() {
-                            a.isPressButton = true;
+                            isPressButton = true;
                           });
                         },
-                      ),
+                        child: Icon(Icons.close, color: Colors.red,size: 150,)
                     ),
-                  )
+                  ),
                 ],
               ),
             )
@@ -312,7 +289,7 @@ class _MyAppState extends State<MyApp> {
   }
 
   //int = 3
-  Widget GameOver(){
+  Widget gameOver(){
     if(numberBest < numberCurrent){
       numberBest = numberCurrent;
     }
@@ -359,29 +336,29 @@ class _MyAppState extends State<MyApp> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Container(
-                    color: Colors.white,
+                  Material(
                     child: InkWell(
-                      child: IconButton(
-                        icon: Icon(Icons.replay, size: 80,),
-                        onPressed: () {
+                        onTap: () {
                           numberCurrent = 0;
                           screenChange(2);
                         },
-                      ),
+                        child: Container(
+                          padding: EdgeInsets.all(8),
+                          child: Icon(Icons.replay, size: 80, color: Colors.black.withOpacity(0.7),),
+                        )
                     ),
                   ),
-                  Container(
-                    color: Colors.white,
+                  Material(
                     child: InkWell(
-                      child: IconButton(
-                        icon: Icon(Icons.home, size: 80,),
-                        onPressed: () {
+                        onTap: () {
                           screenChange(1);
                         },
-                      ),
+                        child: Container(
+                          padding: EdgeInsets.all(8),
+                          child: Icon(Icons.home, size: 80, color: Colors.black.withOpacity(0.7),),
+                        )
                     ),
-                  )
+                  ),
                 ],
               ),
             )
