@@ -3,7 +3,7 @@ class Task{
   final String startTime;
   final String endTime;
   final String deadline;
-  final bool isFavourite;
+  late bool isFavourite;
   late  bool isCompleted;
   final String remind;
   final String repeat;
